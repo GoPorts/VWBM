@@ -2,18 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Browserling Clone</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtual Browser</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="container">
-    <h1>🔒 Virtual Browser (Client-side)</h1>
-    <input type="text" id="urlInput" placeholder="Enter URL (e.g. https://example.com)" />
-    <button onclick="loadRemotePage()">Browse</button>
-    <div class="status" id="statusMsg">Enter a URL to begin...</div>
-    <iframe id="remoteFrame"></iframe>
+  <div class="header">
+    <h1>🌐 Virtual Browser Machine</h1>
+    <p>Simulate browsing with proxy options and IP check</p>
   </div>
+
+  <div class="controls">
+    <input type="text" id="urlInput" placeholder="Enter a website URL..." />
+    <button onclick="loadSite()">Load</button>
+    <select id="proxySelect">
+      <option value="">No Proxy (Direct)</option>
+      <option value="https://api.codetabs.com/v1/proxy?quest=">CodeTabs Proxy</option>
+      <option value="https://api.allorigins.win/raw?url=">AllOrigins Proxy</option>
+    </select>
+  </div>
+
+  <div class="ip-info">
+    Your IP: <span id="ipData">Fetching...</span>
+    <button onclick="fetchIP()">🔄 Refresh IP</button>
+  </div>
+
+  <iframe id="browserFrame" sandbox="allow-scripts allow-same-origin"></iframe>
+
+  <div class="devtools">
+    <h2>🛠 DevTools (Preview)</h2>
+    <p>This is a simulated inspector box for educational use.</p>
+    <pre><code>&lt;html&gt;... (site HTML loads here) ...&lt;/html&gt;</code></pre>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
