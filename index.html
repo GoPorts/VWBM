@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Browserling Clone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔒 Virtual Browser (Client-side)</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL (e.g. https://example.com)" />
+    <button onclick="loadRemotePage()">Browse</button>
+    <div class="status" id="statusMsg">Enter a URL to begin...</div>
+    <iframe id="remoteFrame"></iframe>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
