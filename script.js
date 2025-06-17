@@ -1,24 +1,33 @@
-async function loadRemotePage() {
-  const input = document.getElementById("urlInput").value.trim();
-  const url = input.startsWith("http") ? input : "https://" + input;
-
-  const status = document.getElementById("statusMsg");
-  const frame = document.getElementById("remoteFrame");
-  status.textContent = "Loading via proxy...";
-
+// Update user IP
+async function fetchIP() {
+  const ipBox = document.getElementById("ipData");
   try {
-    const res = await fetch("https://your-proxy-url.com/browse", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url }),
-    });
-
-    const html = await res.text();
-    const blob = new Blob([html], { type: "text/html" });
-    frame.src = URL.createObjectURL(blob);
-
-    status.textContent = "✅ Loaded";
-  } catch (err) {
-    status.textContent = "❌ Proxy error: " + err.message;
+    const res = await fetch("https://ipapi.co/json");
+    const data = await res.json();
+    ipBox.textContent = `${data.ip} (${data.city}, ${data.country_name})`;
+  } catch {
+    ipBox.textContent = "Error fetching IP";
   }
 }
+
+// Load site through optional proxy
+function loadSite() {
+  const urlInput = document.getElementById("urlInput").value.trim();
+  const proxy = document.getElementById("proxySelect").value;
+  const iframe = document.getElementById("browserFrame");
+
+  if (!urlInput) {
+    alert("Please enter a valid URL.");
+    return;
+  }
+
+  let fullURL = urlInput.startsWith("http") ? urlInput : `https://${urlInput}`;
+  if (proxy) {
+    fullURL = proxy + encodeURIComponent(fullURL);
+  }
+
+  iframe.src = fullURL;
+}
+
+// Load IP on start
+fetchIP();
